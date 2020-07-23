@@ -1,30 +1,38 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
 
 Vue.use(VueRouter);
+import recommend from "./routes/recommend";
+import phone from "./routes/phone";
+import acoustics from "./routes/acoustics";
+import fitting from "./routes/fitting";
+import life from "./routes/life";
+import customer from "./routes/customer";
+import address from "./routes/address";
+import order from "./routes/order";
+import personal from "./routes/personal";
 
 const routes = [
   {
     path: "/",
-    name: "Home",
-    component: Home
+    redirect: "/recommend"
   },
-  {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
-  }
+  ...recommend, // 推荐
+  phone, // 手机
+  acoustics, // 声学
+  fitting, // 配件
+  life, // 生活
+  customer, // 客服
+  ...address, // 地址
+  ...order, // 订单
+  ...personal // 个人中心
 ];
 
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
-  routes
+  routes,
+  linkActiveClass: "active"
 });
 
 export default router;
